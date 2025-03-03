@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Różowa Strona z Przyciskami</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff69b4, #ff1493, #ff6eb4, #ff82ab, #ffb6c1);
+            background-size: 400% 400%;
+            animation: rainbow 10s ease infinite;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            transition: font-size 0.5s ease, color 0.5s ease;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+        }
+
+        button#yes {
+            background-color: #ff69b4; /* Różowy */
+            color: white;
+        }
+
+        button#no {
+            background-color: #ff1493; /* Ciemniejszy różowy */
+            color: white;
+        }
+
+        button#no.disabled {
+            opacity: 0; /* Przycisk staje się przezroczysty */
+            cursor: not-allowed; /* Zmiana kursora na "nieaktywny" */
+            pointer-events: none; /* Wyłącza interakcję z przyciskiem */
+        }
+
+        .gejuch {
+            font-size: 4em; /* Większy napis */
+            color: #fff; /* Kolor napisu */
+            animation: gejuch-animation 1s infinite alternate;
+        }
+
+        @keyframes gejuch-animation {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="question">Czy lubisz różowy styl?</h1>
+        <div class="buttons" id="buttons">
+            <button id="yes">Tak</button>
+            <button id="no">Nie</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const question = document.getElementById('question');
+        const buttonsContainer = document.getElementById('buttons');
+
+        // Wyłączanie przycisku "Nie" po najechaniu
+        noButton.addEventListener('mouseover', () => {
+            noButton.classList.add('disabled'); // Dodaj klasę "disabled" po najechaniu
+        });
+
+        noButton.addEventListener('mouseout', () => {
+            noButton.classList.remove('disabled'); // Usuń klasę "disabled" po zjechaniu
+        });
+
+        // Obsługa kliknięcia przycisku "Tak"
+        yesButton.addEventListener('click', () => {
+            // Zmiana tekstu pytania
+            question.textContent = "GEJUCH!!!";
+            question.classList.add('gejuch'); // Dodaj klasę z animacją
+
+            // Ukryj przyciski
+            buttonsContainer.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
